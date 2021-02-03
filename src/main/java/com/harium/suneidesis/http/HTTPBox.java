@@ -1,0 +1,40 @@
+package com.harium.suneidesis.http;
+
+import com.harium.marine.Web;
+import com.harium.suneidesis.chat.box.BoxHandler;
+import com.harium.suneidesis.chat.box.ChatBox;
+import com.harium.suneidesis.chat.output.Output;
+
+public class HTTPBox implements BoxHandler {
+
+  private int port = 11883;
+
+  private MessageModule module = new MessageModule();
+
+  public void init() {
+    Web.port(port);
+    Web.register(module);
+    Web.init();
+  }
+
+  @Override
+  public void addBox(ChatBox instance) {
+    module.instance = instance;
+  }
+
+  public HTTPBox output(Output output) {
+    module.output = output;
+    return this;
+  }
+
+  public HTTPBox port(int port) {
+    this.port = port;
+    return this;
+  }
+
+  @Override
+  public void sendMessage(String channel, String message) {
+
+  }
+
+}
