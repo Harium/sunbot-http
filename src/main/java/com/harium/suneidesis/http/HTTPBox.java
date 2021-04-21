@@ -34,7 +34,7 @@ public class HTTPBox implements BoxHandler {
 
   @Override
   public void sendMessage(String channel, String message) {
-
+    module.output.print(message);
   }
 
 }
