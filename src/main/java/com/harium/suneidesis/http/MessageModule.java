@@ -3,14 +3,16 @@ package com.harium.suneidesis.http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.harium.marine.model.WebModule;
-import com.harium.suneidesis.chat.box.ChatBox;
+import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.OutputContext;
 import com.harium.suneidesis.chat.output.TextOutput;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.post;
@@ -18,7 +20,8 @@ import static spark.Spark.post;
 public class MessageModule implements WebModule {
 
     public static final String PARAM_MESSAGE = "message";
-    protected ChatBox instance;
+
+    protected List<Parser> parsers = new ArrayList<>();
 
     protected Output output = new TextOutput();
 
@@ -53,7 +56,11 @@ public class MessageModule implements WebModule {
         context.setSentence(message);
         context.getProperties().putAll(params);
 
-        instance.input(context, output);
+        for (Parser parser : parsers) {
+            if (parser.parse(context, output)) {
+                break;
+            }
+        }
     }
 
     class OutputWrapper implements Output {

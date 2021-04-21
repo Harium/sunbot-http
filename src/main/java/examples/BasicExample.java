@@ -1,6 +1,6 @@
 package examples;
 
-import com.harium.suneidesis.chat.box.ChatBox;
+import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.EchoBox;
 import com.harium.suneidesis.http.HTTPBox;
 
@@ -11,11 +11,11 @@ import com.harium.suneidesis.http.HTTPBox;
 public class BasicExample {
 
   public static void main(String[] args) {
-    ChatBox bot = new EchoBox();
+    Parser bot = new EchoBox();
 
     HTTPBox http = new HTTPBox();
     http.port(11883);
-    http.addBox(bot);
+    http.addParser(bot);
     http.init();
   }
 

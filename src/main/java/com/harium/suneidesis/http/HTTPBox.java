@@ -1,8 +1,8 @@
 package com.harium.suneidesis.http;
 
 import com.harium.marine.Web;
+import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.BoxHandler;
-import com.harium.suneidesis.chat.box.ChatBox;
 import com.harium.suneidesis.chat.output.Output;
 
 public class HTTPBox implements BoxHandler {
@@ -18,8 +18,8 @@ public class HTTPBox implements BoxHandler {
   }
 
   @Override
-  public void addBox(ChatBox instance) {
-    module.instance = instance;
+  public void addParser(Parser parser) {
+    module.parsers.add(parser);
   }
 
   public HTTPBox output(Output output) {
