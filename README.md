@@ -6,9 +6,9 @@ Plugin to turn your Suneidesis Chatbot into a HTTP server
 ## How to use it
 
 ```java
-    ChatBox bot = new EchoBox(); // Use your own box
+    Parser bot = new EchoBox(); // Use your own box
 
-    HTTPBox http = new HTTPBox();
+    SunbotHttp http = new SunbotHttp();
     http.port(11883);
     http.addBox(bot);
     http.init();
@@ -16,7 +16,9 @@ Plugin to turn your Suneidesis Chatbot into a HTTP server
 
 ## Sending messages
 
-You can use any tool to post messages to the bot:
+You can use the [Sunbot HTTP Client](https://github.com/Harium/sunbot-http-client) or any other HTTP tool:
+
+### Curl
 
 ```shell script
 curl -XPOST -d '{"message":"Hello World!"}' localhost:11883

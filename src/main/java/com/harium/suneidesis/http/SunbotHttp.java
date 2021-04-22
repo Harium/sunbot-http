@@ -5,7 +5,7 @@ import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.BoxHandler;
 import com.harium.suneidesis.chat.output.Output;
 
-public class HTTPBox implements BoxHandler {
+public class SunbotHttp implements BoxHandler {
 
   private int port = 11883;
 
@@ -22,12 +22,12 @@ public class HTTPBox implements BoxHandler {
     module.parsers.add(parser);
   }
 
-  public HTTPBox output(Output output) {
+  public SunbotHttp output(Output output) {
     module.output = output;
     return this;
   }
 
-  public HTTPBox port(int port) {
+  public SunbotHttp port(int port) {
     this.port = port;
     return this;
   }

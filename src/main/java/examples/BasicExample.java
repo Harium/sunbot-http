@@ -2,7 +2,7 @@ package examples;
 
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.EchoBox;
-import com.harium.suneidesis.http.HTTPBox;
+import com.harium.suneidesis.http.SunbotHttp;
 
 /**
  * Simulate client
@@ -13,7 +13,7 @@ public class BasicExample {
   public static void main(String[] args) {
     Parser bot = new EchoBox();
 
-    HTTPBox http = new HTTPBox();
+    SunbotHttp http = new SunbotHttp();
     http.port(11883);
     http.addParser(bot);
     http.init();
