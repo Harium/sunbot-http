@@ -1,7 +1,7 @@
 # sunbot-http
 Plugin to turn your Suneidesis Chatbot into a HTTP server
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis/sunbot-http/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis/sunbot-http/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis.sunbot/http/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis.sunbot/http/)
 
 ## How to use it
 
