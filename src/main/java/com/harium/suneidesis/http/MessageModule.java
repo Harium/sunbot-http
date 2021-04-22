@@ -3,6 +3,7 @@ package com.harium.suneidesis.http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.harium.marine.model.WebModule;
+import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
@@ -22,6 +23,7 @@ public class MessageModule implements WebModule {
     public static final String PARAM_MESSAGE = "message";
 
     protected List<Parser> parsers = new ArrayList<>();
+    protected List<Interceptor> interceptors = new ArrayList<>();
 
     protected Output output = new TextOutput();
 
@@ -56,6 +58,9 @@ public class MessageModule implements WebModule {
         context.setSentence(message);
         context.getProperties().putAll(params);
 
+        for (Interceptor interceptor : interceptors) {
+            interceptor.intercept(context, output);
+        }
         for (Parser parser : parsers) {
             if (parser.parse(context, output)) {
                 break;
