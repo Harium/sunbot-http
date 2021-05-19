@@ -21,13 +21,14 @@ import static spark.Spark.post;
 public class MessageModule extends BaseChatBox implements WebModule {
 
     public static final String PARAM_MESSAGE = "message";
+    public static final String MEDIA_TYPE_JSON = "application/json";
 
     protected Output output = new TextOutput();
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public void init() {
-        post("/", (request, response) -> {
+        post("/", MEDIA_TYPE_JSON, (request, response) -> {
             String json = request.body();
             JsonNode node = objectMapper.readTree(json);
 
