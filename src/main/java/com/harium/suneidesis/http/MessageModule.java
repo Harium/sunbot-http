@@ -84,7 +84,7 @@ public class MessageModule extends BaseChatBox implements WebModule {
 
     static class OutputWrapper implements Output {
 
-        private String sentence;
+        private String sentence = "";
 
         private Output output;
 
