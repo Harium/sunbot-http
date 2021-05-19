@@ -7,6 +7,7 @@ import com.harium.suneidesis.http.SunbotHttp;
 /**
  * Simulate client
  * curl -XPOST -d '{"message":"Hello World!"}' localhost:11883
+ * curl -XPOST -d '{"message":"Hello World!", "lang":"en"}' localhost:11883
  */
 public class BasicExample {
 

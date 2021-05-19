@@ -3,27 +3,21 @@ package com.harium.suneidesis.http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.harium.marine.model.WebModule;
-import com.harium.suneidesis.chat.Interceptor;
-import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.box.BaseChatBox;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.OutputContext;
 import com.harium.suneidesis.chat.output.TextOutput;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.post;
 
-public class MessageModule implements WebModule {
+public class MessageModule extends BaseChatBox implements WebModule {
 
     public static final String PARAM_MESSAGE = "message";
-
-    protected List<Parser> parsers = new ArrayList<>();
-    protected List<Interceptor> interceptors = new ArrayList<>();
 
     protected Output output = new TextOutput();
 
@@ -53,22 +47,30 @@ public class MessageModule implements WebModule {
         });
     }
 
+    @Override
+    public void sendMessage(String channel, String message) {
+        output.print(message);
+    }
+
+    @Override
+    public void setOutput(Output output) {
+        this.output = output;
+    }
+
+    @Override
+    public Output getOutput() {
+        return output;
+    }
+
     private void onReceiveMessage(String message, Map<String, String> params, Output output) {
         InputContext context = new InputContext();
         context.setSentence(message);
         context.getProperties().putAll(params);
 
-        for (Interceptor interceptor : interceptors) {
-            interceptor.intercept(context, output);
-        }
-        for (Parser parser : parsers) {
-            if (parser.parse(context, output)) {
-                break;
-            }
-        }
+        parseInput(context, output);
     }
 
-    class OutputWrapper implements Output {
+    static class OutputWrapper implements Output {
 
         private String sentence;
 

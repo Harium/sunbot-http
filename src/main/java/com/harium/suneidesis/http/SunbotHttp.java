@@ -2,10 +2,10 @@ package com.harium.suneidesis.http;
 
 import com.harium.marine.Web;
 import com.harium.suneidesis.chat.Parser;
-import com.harium.suneidesis.chat.box.BoxHandler;
+import com.harium.suneidesis.chat.box.BaseChatBox;
 import com.harium.suneidesis.chat.output.Output;
 
-public class SunbotHttp implements BoxHandler {
+public class SunbotHttp extends BaseChatBox {
 
   private int port = 11883;
 
@@ -19,7 +19,7 @@ public class SunbotHttp implements BoxHandler {
 
   @Override
   public void addParser(Parser parser) {
-    module.parsers.add(parser);
+    module.addParser(parser);
   }
 
   public SunbotHttp output(Output output) {
@@ -34,7 +34,16 @@ public class SunbotHttp implements BoxHandler {
 
   @Override
   public void sendMessage(String channel, String message) {
-    module.output.print(message);
+    module.sendMessage(channel, message);
+  }
+
+  @Override
+  public void setOutput(Output output) {
+    output(output);
+  }
+
+  @Override public Output getOutput() {
+    return module.output;
   }
 
 }
